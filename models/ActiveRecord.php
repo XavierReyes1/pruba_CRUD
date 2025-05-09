@@ -8,6 +8,10 @@ class ActiveRecord{
     protected static $tabla ='';
     protected static $columnasDB =[];
     public $id;
+    protected static $alertas = [
+        'error' => [],
+        'exito' => []
+    ];
     
     public static function setDB($database)  {
         self::$db = $database;
@@ -49,10 +53,10 @@ class ActiveRecord{
         $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return array_map([static::class,'crearObjeto'],$registros);
     }
-    public static function buscarId($id){
-        $query = "SELECT * FROM ".static::$tabla." WHERE id=:id";
+    public static function buscar($columna,$valor){
+        $query = "SELECT * FROM ".static::$tabla." WHERE $columna = :valor";
         $stmt = self::$db->prepare($query);
-        $stmt->execute(['id' => $id]); // Cambiar 'excute' por 'execute'
+        $stmt->execute(['valor' => $valor]); // Cambiar 'excute' por 'execute'
         $registro = $stmt->fetch(PDO::FETCH_ASSOC);
         return $registro ? static::crearObjeto($registro) : null;
     }
@@ -88,7 +92,13 @@ class ActiveRecord{
         $stmt = self::$db->prepare($query);
         return   $stmt->excute(['id'=>$this->id]);
     }
+  public static function setAlerta($tipo, $mensaje) {
+        static::$alertas[$tipo][] = $mensaje;
+    }
 
+    public static function getAlertas() {
+        return static::$alertas;
+    }
 }
 
 

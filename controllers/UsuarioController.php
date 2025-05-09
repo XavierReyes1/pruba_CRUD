@@ -27,7 +27,7 @@ class UsuarioController{
     }
     public static function actualizar(Router $router){
         $id = $_GET['id'];
-        $cliente = Cliente::buscarId($id);
+        $cliente = Cliente::buscar('id',$id);
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $cliente = new Cliente($_POST);
