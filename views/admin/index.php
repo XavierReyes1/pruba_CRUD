@@ -1,7 +1,7 @@
 <div class="header">
 
     <h1>Clientes</h1>
-    <a href="/">Cerrar Sesión</a>
+    <a href="/" class="boton cerrar boton-eliminar">Cerrar Sesión</a>
 </div>
 
 <div class="formulario">
@@ -41,7 +41,7 @@
                     <a href="/admin/actualizar?id=<?php echo $cliente->id; ?>">Actualizar</a>
                     <form method="POST" action="/admin/eliminar">
                         <input type="hidden" name="id" value="<?php echo $cliente->id; ?>">
-                        <input type="submit" value="Eliminar" class="boton-eliminar">
+                        <input type="submit" value="Eliminar" class="boton boton-eliminar">
                     </form>
             </tr>
         <?php endforeach; ?>
