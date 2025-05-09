@@ -32,4 +32,5 @@
         </div>
         <input type="submit" value="Crear Usuario" class="boton boton-verde">
     </fieldset>
+       <a href="/admin/usuarios" class="boton">Volver</a>
 </form>
