@@ -257,3 +257,34 @@ h1{
   background-color: #d4edda;
   color: #155724;
 }
+
+.campo-busqueda{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  input[type="text"] {
+    flex: 1;
+    margin-right: 0.5rem;
+    padding: .8rem;
+  }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+.header h1 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+}
+
+.header a {
+    position: absolute;
+    right: 10px;
+}
