@@ -3,10 +3,15 @@
     <h1>Clientes</h1>
     <a href="/">Cerrar Sesión</a>
 </div>
-<div class="formulario">
-    <?php include_once __DIR__ . '/../alertas.php'; ?>
-</div>
 
+<div class="formulario">
+    <form method="GET" action="/admin/usuarios" class="filtro-form">
+        <div class="campo-busqueda">
+        <input type="text" name="busqueda" placeholder="Buscar por nombre o email" value="<?php echo $_GET['busqueda'] ?? ''; ?>">
+        <input type="submit" value="Filtrar" class="boton boton-verde">
+        </div>
+    </form>
+</div>
 <table>
     <a href="/admin/crear" class="boton boton-verde">Crear Cliente</a>
     <thead>
@@ -43,4 +48,5 @@
        
     </tbody>
 </table>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/build/app.js"></script>

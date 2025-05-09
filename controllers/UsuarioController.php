@@ -6,16 +6,18 @@ use Model\Cliente;
 use MVC\Router;
 
 class UsuarioController{
-    public static function index(Router $router){
-        $clientes = new Cliente();
-        $clientes = Cliente::all();
-        $alertas = [];
+public static function index(Router $router) {
+    $alertas = [];
 
-        $router->render('admin/index',[
-            'clientes'=>$clientes,
-            'alertas' => $alertas
-        ]);
-    }
+    $busqueda = $_GET['busqueda'] ?? '';
+
+    $clientes = Cliente::filtrar($busqueda);
+
+    $router->render('admin/index', [
+        'clientes' => $clientes,
+        'alertas' => $alertas
+    ]);
+}
     public static function crear(Router $router){
      $alertas = [];
     $cliente = new Cliente();
