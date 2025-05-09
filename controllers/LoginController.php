@@ -32,7 +32,7 @@ class LoginController
                         $_SESSION['login'] = true;
 
                         // Redireccionar
-                        header('Location: /admin/usuarios');
+                        header('Location: /admin/index');
                         exit;
                     } else {
                         Usuario::setAlerta('error', 'La contraseña es incorrecta');
@@ -55,6 +55,6 @@ class LoginController
     {
         session_start();
         $_SESSION = [];
-        header('Location: /login');
+        header('Location: /');
     }
 }

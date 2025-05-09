@@ -13,4 +13,10 @@ function debuguear($variable){
     exit;
 }
 
+function sesionActiva()  {
+    if(!isset($_SESSION['login'])) {
+        header('Location: /');
+    }
+}
+
 ActiveRecord::setDB($db);

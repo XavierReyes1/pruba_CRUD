@@ -35,5 +35,5 @@
         </div>
         <input type="submit" value="Actualizar Usuario" class="boton boton-verde">
     </fieldset>
-    <a href="/admin/usuarios" class="boton">Volver</a>
+    <a href="/admin/index" class="boton">Volver</a>
 </form>
