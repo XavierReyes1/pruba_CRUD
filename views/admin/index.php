@@ -1,3 +1,10 @@
+<div class="header">
+
+    <h1>Clientes</h1>
+    <a href="/admin/logar">Cerrar Sesión</a>
+</div>
+
+
 <table>
     <thead>
         <tr>
@@ -30,5 +37,6 @@
                     </form>
             </tr>
         <?php endforeach; ?>
+       
     </tbody>
 </table>
