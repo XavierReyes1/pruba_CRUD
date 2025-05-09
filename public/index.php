@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__.'/../vendor/autoload.php';
+include_once __DIR__.'/../includes/app.php';
 
 use Controller\UsuarioController;
 use MVC\Router;

@@ -7,6 +7,8 @@ class ActiveRecord{
     protected static $db;
     protected static $tabla ='';
     protected static $columnasDB =[];
+    public $id;
+    
     public static function setDB($database)  {
         self::$db = $database;
     }
@@ -18,6 +20,20 @@ class ActiveRecord{
             }
         }
         return $objeto;
+    }
+    public function sincronizar($args = []){
+        foreach($args as $key => $value){
+            if(property_exists($this,$key) && !is_null($value)){
+                $this->$key = $value;
+            }
+        }
+    }
+    public function guardar(){
+        if(!is_null($this->id)){
+            $this->actualizar();
+        }else{
+            $this->crear();
+        }
     }
     public function atributos(){
         $atributos = [];
@@ -47,9 +63,31 @@ class ActiveRecord{
         $placeholders = ':'.join(',:',array_keys($atributo));
 
         $query = "INSERT INTO ".static::$tabla."($columnas) values ($placeholders)";
-  
+        $stmt = self::$db->prepare($query);
+        $resultado = $stmt->excute($atributo);
+        if($resultado){
+            $this->id = self::$db->lastInsertId();
+        }
+        return ['resultado'=> $resultado,'id'=>$this->id];
+    }
+    public function actualizar(){
+        $atributo = $this->atributos();
+        $valores = [];
+        foreach($atributo as $key => $value){
+            $valores[] = "$key = :$key";
+        }
+        $query = "UPDATE ".static::$tabla." SET ".join(',',$valores)." WHERE id = :id LIMIT 1";
+        $atributo['id'] = $this->id;
+        $stmt = self::$db->prepare($query);
+        $resultado = $stmt->excute($atributo);
+        return ['resultado'=> $resultado];
     }
 
+    public function eliminar(){
+        $query = "DELETE FROM ".static::$tabla." WHERE id = :id LIMIT 1";
+        $stmt = self::$db->prepare($query);
+        return   $stmt->excute(['id'=>$this->id]);
+    }
 
 }
 
