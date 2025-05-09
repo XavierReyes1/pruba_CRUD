@@ -1,7 +1,7 @@
 <div class="header">
 
     <h1>Clientes</h1>
-    <a href="/" class="boton cerrar boton-eliminar">Cerrar Sesión</a>
+    <a href="/" class="boton cerrar boton-salir">Cerrar Sesión</a>
 </div>
 
 <div class="formulario">

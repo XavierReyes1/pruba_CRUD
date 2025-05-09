@@ -191,6 +191,15 @@ table tbody tr:hover {
   background-color: #e5177e;
   transform: translateY(-2px);
 }
+.boton-salir {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.boton-salir:hover {
+  background-color: #e5177e;
+  transform: translateY(-2px);
+}
 
 /* Ajustes específicos para botones en formularios y tablas */
 .formulario .boton {

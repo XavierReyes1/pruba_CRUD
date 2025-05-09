@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Botones para eliminar
     const botonesEliminar = document.querySelectorAll('.boton-eliminar');
 
     botonesEliminar.forEach(boton => {
@@ -19,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cancelButtonText: "Cancelar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Opcional: mostrar confirmación visual antes de enviar
                     Swal.fire({
                         title: "¡Eliminado!",
                         text: `${nombre} ha sido eliminado.`,
@@ -28,13 +28,35 @@ document.addEventListener('DOMContentLoaded', () => {
                         showConfirmButton: false
                     });
 
-                    // Enviar el formulario
                     const formulario = boton.closest('form');
                     if (formulario) {
-                        setTimeout(() => formulario.submit(), 1600); // Esperar a que se muestre el mensaje
+                        setTimeout(() => formulario.submit(), 1600);
                     }
                 }
             });
         });
     });
+
+    // Botón para cerrar sesión
+    const botonSalir = document.querySelector('.boton-salir');
+    if (botonSalir) {
+        botonSalir.addEventListener('click', event => {
+            event.preventDefault();
+
+            Swal.fire({
+                title: "¿Cerrar sesión?",
+                text: "Tendrás que volver a iniciar sesión para continuar.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#aaa",
+                confirmButtonText: "Sí, salir",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = botonSalir.getAttribute('href');
+                }
+            });
+        });
+    }
 });
