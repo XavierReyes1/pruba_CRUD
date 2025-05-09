@@ -29,6 +29,6 @@
                         <input type="submit" value="Eliminar">
                     </form>
             </tr>
-        <?php endforeach; debuguear($clientes); ?>
+        <?php endforeach; ?>
     </tbody>
 </table>

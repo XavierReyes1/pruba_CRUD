@@ -50,11 +50,11 @@ class ActiveRecord{
         return array_map([static::class,'crearObjeto'],$registros);
     }
     public static function buscarId($id){
-        $query = "SELECT * FROM ".static::$tabla." Where id=:id";
+        $query = "SELECT * FROM ".static::$tabla." WHERE id=:id";
         $stmt = self::$db->prepare($query);
-        $stmt = self::$db->excute(['id'=> $id]);
+        $stmt->execute(['id' => $id]); // Cambiar 'excute' por 'execute'
         $registro = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $registro ? static::crearObjeto($registro): null;
+        return $registro ? static::crearObjeto($registro) : null;
     }
 
     public function crear(){

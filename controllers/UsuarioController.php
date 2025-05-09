@@ -8,7 +8,7 @@ use MVC\Router;
 class UsuarioController{
     public static function index(Router $router){
         $clientes = new Cliente();
-        $clientes->all();
+        $clientes = Cliente::all();
 
 
         $router->render('admin/index',[
