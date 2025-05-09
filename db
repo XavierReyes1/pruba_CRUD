@@ -1,0 +1,31 @@
+-- Crear base de datos
+DROP DATABASE IF EXISTS prueba;
+CREATE DATABASE prueba CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE prueba;
+
+-- Crear tabla cliente
+CREATE TABLE cliente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50),
+    email VARCHAR(40),
+    telefono VARCHAR(20),
+    pais VARCHAR(50) NOT NULL,
+    fecha_registro DATE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Crear tabla usuario
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(50),
+    password VARCHAR(80)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Insertar datos en cliente
+INSERT INTO cliente (nombre, apellido, email, telefono, pais, fecha_registro) VALUES
+('Axel', 'Reyes', 'correo@correo.com', '+504 90201', 'Honduras', '2025-05-09'),
+('Axel Reyes', 'Reyes', 'correo2@correo.com', '+504 1023131', 'Estados Unidos', '2025-05-09');
+
+-- Insertar datos en usuario
+INSERT INTO usuario (email, password) VALUES
+('correo@correo.com', '123456');

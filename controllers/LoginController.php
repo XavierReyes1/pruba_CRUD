@@ -13,7 +13,7 @@ class LoginController
     public static function login(Router $router)
     {
         $alertas = [];
-
+        $usuario = new Usuario($_POST);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario = new Usuario($_POST);
             $alertas = $usuario->validarLogin();
