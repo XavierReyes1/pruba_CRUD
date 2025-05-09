@@ -8,10 +8,7 @@ class ActiveRecord{
     protected static $tabla ='';
     protected static $columnasDB =[];
     public $id;
-    protected static $alertas = [
-        'error' => [],
-        'exito' => []
-    ];
+     protected static $alertas = [];
     
     public static function setDB($database)  {
         self::$db = $database;
@@ -40,12 +37,12 @@ class ActiveRecord{
         }
     }
     public function atributos(){
-        $atributos = [];
-        foreach(static::$columnasDB as $columna){
-            if($columna ==='id') continue;
-            $atributo[$columna] = $this->$columna ?? ''; 
-        }
-        return $atributos;
+       $atributos = [];
+    foreach(static::$columnasDB as $columna){
+        if($columna === 'id') continue;
+        $atributos[$columna] = $this->$columna ?? ''; 
+    }
+    return $atributos;
     }
     public static function all(){
         $query = "SELECT * FROM ".static::$tabla;
@@ -68,7 +65,7 @@ class ActiveRecord{
 
         $query = "INSERT INTO ".static::$tabla."($columnas) values ($placeholders)";
         $stmt = self::$db->prepare($query);
-        $resultado = $stmt->excute($atributo);
+        $resultado = $stmt->execute($atributo);
         if($resultado){
             $this->id = self::$db->lastInsertId();
         }
@@ -76,21 +73,21 @@ class ActiveRecord{
     }
     public function actualizar(){
         $atributo = $this->atributos();
-        $valores = [];
-        foreach($atributo as $key => $value){
-            $valores[] = "$key = :$key";
-        }
-        $query = "UPDATE ".static::$tabla." SET ".join(',',$valores)." WHERE id = :id LIMIT 1";
-        $atributo['id'] = $this->id;
-        $stmt = self::$db->prepare($query);
-        $resultado = $stmt->excute($atributo);
-        return ['resultado'=> $resultado];
+    $valores = [];
+    foreach($atributo as $key => $value){
+        $valores[] = "$key = :$key";
+    }
+    $query = "UPDATE " . static::$tabla . " SET " . join(',', $valores) . " WHERE id = :id LIMIT 1";
+    $atributo['id'] = $this->id;
+    $stmt = self::$db->prepare($query);
+    $resultado = $stmt->execute($atributo);
+    return ['resultado' => $resultado];
     }
 
     public function eliminar(){
         $query = "DELETE FROM ".static::$tabla." WHERE id = :id LIMIT 1";
         $stmt = self::$db->prepare($query);
-        return   $stmt->excute(['id'=>$this->id]);
+        return   $stmt->execute(['id'=>$this->id]);
     }
   public static function setAlerta($tipo, $mensaje) {
         static::$alertas[$tipo][] = $mensaje;

@@ -1,11 +1,14 @@
 <div class="header">
 
     <h1>Clientes</h1>
-    <a href="/admin/logar">Cerrar Sesión</a>
+    <a href="/">Cerrar Sesión</a>
+</div>
+<div class="formulario">
+    <?php include_once __DIR__ . '/../alertas.php'; ?>
 </div>
 
-
 <table>
+    <a href="/admin/crear" class="boton boton-verde">Crear Cliente</a>
     <thead>
         <tr>
             <th>id</th>
@@ -33,10 +36,11 @@
                     <a href="/admin/actualizar?id=<?php echo $cliente->id; ?>">Actualizar</a>
                     <form method="POST" action="/admin/eliminar">
                         <input type="hidden" name="id" value="<?php echo $cliente->id; ?>">
-                        <input type="submit" value="Eliminar">
+                        <input type="submit" value="Eliminar" class="boton-eliminar">
                     </form>
             </tr>
         <?php endforeach; ?>
        
     </tbody>
 </table>
+    <script src="/build/app.js"></script>

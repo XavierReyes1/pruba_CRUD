@@ -22,7 +22,7 @@ class Cliente extends ActiveRecord{
         $this->email = $args['email'] ?? '';
         $this->telefono = $args['telefono'] ?? '';
         $this->pais = $args['pais'] ?? '';
-        $this->fecha_registro = $args['fecha_registro'] ?? '';
+        $this->fecha_registro = $args['fecha_registro'] ??  date('Y-m-d');
     }
 
         public function validar() {

@@ -9,10 +9,11 @@ class UsuarioController{
     public static function index(Router $router){
         $clientes = new Cliente();
         $clientes = Cliente::all();
-
+        $alertas = [];
 
         $router->render('admin/index',[
-            'clientes'=>$clientes
+            'clientes'=>$clientes,
+            'alertas' => $alertas
         ]);
     }
     public static function crear(Router $router){
@@ -28,6 +29,7 @@ class UsuarioController{
             if ($resultado) {
                 Cliente::setAlerta('exito', 'Cliente creado correctamente');
             }
+            header('Location: /admin/usuarios');
         }
         $alertas = Cliente::getAlertas();
     }
@@ -45,14 +47,18 @@ class UsuarioController{
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cliente->sincronizar($_POST);
+           $cliente->fecha_registro = date('Y/m/d');
         $alertas = $cliente->validar();
 
         if (empty($alertas['error'])) {
-            $cliente->fecha_registro = date('Y/m/d');
+         
             $resultado = $cliente->guardar();
+            
             if ($resultado) {
                 Cliente::setAlerta('exito', 'Cliente actualizado correctamente');
+                
             }
+            header('Location: /admin/usuarios');
         }
         $alertas = Cliente::getAlertas();
     }
@@ -62,5 +68,13 @@ class UsuarioController{
         'alertas' => $alertas
     ]);
     }
-    public static function eliminar(){}
+    public static function eliminar(){
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario= Cliente::buscar('id',$_POST['id']);
+            $usuario->eliminar();
+                if($usuario){
+                header('Location: /admin/usuarios');
+            }
+        }
+    }
 }
