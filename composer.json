@@ -1,0 +1,19 @@
+{
+    "name": "axelreyes/crud",
+    "description": "pruebaCrud",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Model\\": "models/",
+            "Controller\\": "controllers/"
+        }
+    },
+    "authors": [
+        {
+            "name": "XavierReyes1",
+            "email": "100733023+XavierReyes1@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
