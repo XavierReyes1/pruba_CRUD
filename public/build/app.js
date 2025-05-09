@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nombre = boton.dataset.nombre;
 
             Swal.fire({
-                title: `¿Eliminar a ${nombre}?`,
+                title: `¿Quires Eliminar el Registro?`,
                 text: "Esta acción no se puede deshacer.",
                 icon: "warning",
                 showCancelButton: true,
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: "¡Eliminado!",
-                        text: `${nombre} ha sido eliminado.`,
+                        text: `El Registro ha sido eliminado.`,
                         icon: "success",
                         timer: 1500,
                         showConfirmButton: false

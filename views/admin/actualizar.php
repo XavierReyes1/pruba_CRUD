@@ -33,7 +33,7 @@
             <option value="Argentina" <?php echo $cliente->pais === 'Argentina' ? 'selected' : ''; ?>>Argentina</option>
         </select>
         </div>
-        <input type="submit" value="Actualizar Usuario">
+        <input type="submit" value="Actualizar Usuario" class="boton boton-verde">
     </fieldset>
     <a href="/admin/usuarios" class="boton">Volver</a>
 </form>

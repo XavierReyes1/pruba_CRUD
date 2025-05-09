@@ -23,9 +23,8 @@ class LoginController
                     
                 if (!$usuario) {
                     Usuario::setAlerta('error', 'El usuario no existe');
-                } 
-               
-                    if ($_POST['password'] === $usuario->password) {
+                } else{
+                     if ($_POST['password'] === $usuario->password) {
                        
                         session_start();
                         $_SESSION['id'] = $usuario->id;
@@ -38,6 +37,9 @@ class LoginController
                     } else {
                         Usuario::setAlerta('error', 'La contraseña es incorrecta');
                     }
+                }
+               
+                   
                 
             }
         }
@@ -45,7 +47,7 @@ class LoginController
         $alertas = Usuario::getAlertas();
 
         $router->render('login/login', [
-            'usuario' => $usuario ?? new Usuario(),
+            'usuario' => $usuario ,
             'alertas' => $alertas
         ]);
     }
