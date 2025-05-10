@@ -51,18 +51,12 @@ class ActiveRecord
         }
         return $atributos;
     }
-    public static function all()
-    {
-        $query = "SELECT * FROM " . static::$tabla;
-        $stmt = self::$db->query($query);
-        $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return array_map([static::class, 'crearObjeto'], $registros);
-    }
+   
     public static function buscar($columna, $valor)
     {
         $query = "SELECT * FROM " . static::$tabla . " WHERE $columna = :valor";
         $stmt = self::$db->prepare($query);
-        $stmt->execute(['valor' => $valor]); // Cambiar 'excute' por 'execute'
+        $stmt->execute(['valor' => $valor]); 
         $registro = $stmt->fetch(PDO::FETCH_ASSOC);
         return $registro ? static::crearObjeto($registro) : null;
     }

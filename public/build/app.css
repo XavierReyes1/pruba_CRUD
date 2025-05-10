@@ -1,4 +1,3 @@
-/* Estilos generales */
 :root {
   --primary-color: #4361ee;
   --secondary-color: #3f37c9;
@@ -7,7 +6,7 @@
   --light-color: #f8f9fa;
   --dark-color: #212529;
   --border-radius: 8px;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s ease;
 }
 
@@ -15,11 +14,18 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--dark-color);
-  background-color: #f5f7fa;
+  background-color: #eef1f7;
   padding: 20px;
 }
 
-/* Estilos para formularios */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+/* Formulario */
 .formulario {
   max-width: 600px;
   margin: 2rem auto;
@@ -31,7 +37,6 @@ body {
 
 .formulario h1 {
   color: var(--primary-color);
-  text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
 }
@@ -46,7 +51,6 @@ body {
 .formulario legend {
   color: var(--secondary-color);
   font-weight: bold;
-  padding: 0 0.5rem;
   font-size: 1.2rem;
 }
 
@@ -58,7 +62,6 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--dark-color);
 }
 
 .campo input {
@@ -68,6 +71,7 @@ body {
   border-radius: var(--border-radius);
   font-size: 1rem;
   transition: var(--transition);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .campo input:focus {
@@ -76,12 +80,7 @@ body {
   box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
 }
 
-
-
-
-
-
-/* Estilos para la tabla */
+/* Tabla */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -120,36 +119,32 @@ table td {
   text-align: left;
 }
 
-table th {
-  font-weight: 600;
-}
-
 table tbody tr {
   border-bottom: 1px solid #e0e0e0;
-  transition: var(--transition);
-}
-
-table tbody tr:last-child {
-  border-bottom: none;
+  transition: background-color 0.2s ease;
 }
 
 table tbody tr:hover {
-  background-color: #f8f9fa;
+  background-color: #f0f4ff;
 }
 
-/* Estilos para botones */
+table td:last-child {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Botones */
 .boton {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   text-align: center;
-  text-decoration: none;
   border-radius: var(--border-radius);
   font-weight: 500;
-  transition: var(--transition);
   cursor: pointer;
   border: none;
   font-size: 1rem;
-  margin-right: 0.5rem;
+  transition: var(--transition);
 }
 
 .boton-verde {
@@ -159,98 +154,44 @@ table tbody tr:hover {
 
 .boton-verde:hover {
   background-color: #3aa8d8;
-  transform: translateY(-2px);
 }
 
-.boton-volver {
+.boton-volver,
+.boton-actualizar {
   background-color: var(--primary-color);
   color: white;
 }
 
-.boton-volver:hover {
-  background-color: var(--secondary-color);
-  transform: translateY(-2px);
-}
-
-.boton-actualizar {
-  background-color: #4cc9f0;
-  color: white;
-}
-
+.boton-volver:hover,
 .boton-actualizar:hover {
-  background-color: #3aa8d8;
-  transform: translateY(-2px);
+  background-color: var(--secondary-color);
 }
 
-.boton-eliminar {
-  background-color: var(--danger-color);
-  color: white;
-}
-
-.boton-eliminar:hover {
-  background-color: #e5177e;
-  transform: translateY(-2px);
-}
+.boton-eliminar,
 .boton-salir {
   background-color: var(--danger-color);
   color: white;
 }
 
+.boton-eliminar:hover,
 .boton-salir:hover {
   background-color: #e5177e;
-  transform: translateY(-2px);
 }
 
-/* Ajustes específicos para botones en formularios y tablas */
-.formulario .boton {
-  margin-top: 0.5rem;
-}
-
-table .boton {
-  margin-bottom: 0.5rem;
-}
-
-/* Responsive para botones */
+/* Responsive botones */
 @media (max-width: 768px) {
   .boton {
     width: 100%;
-    margin-right: 0;
     margin-bottom: 0.5rem;
   }
-}
 
-/* Estilos para acciones en tabla */
-table td:last-child {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .formulario {
-    padding: 1rem;
-  }
-  
-  table {
-    display: block;
-    overflow-x: auto;
-  }
-  
   table td:last-child {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .boton, .boton-eliminar {
-    width: 100%;
-    margin-bottom: 0.5rem;
-    margin-right: 0;
-  }
 }
-h1{
-  text-align: center;
-}
+
+/* Alertas */
 .alerta {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -258,38 +199,50 @@ h1{
   font-weight: bold;
   text-align: center;
 }
+
 .error {
   background-color: #f8d7da;
   color: #721c24;
 }
+
 .exito {
   background-color: #d4edda;
   color: #155724;
 }
 
-.campo-busqueda{
+/* Buscador */
+.campo-busqueda {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  input[type="text"] {
-    flex: 1;
-    margin-right: 0.5rem;
-    padding: .8rem;
-  }
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
 }
 
+.campo-busqueda input[type="text"] {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.campo-busqueda .boton {
+  white-space: nowrap;
+}
+
+/* Selects */
 .campo select {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
   font-size: 1rem;
-  transition: var(--transition);
   background-color: white;
   color: var(--dark-color);
-  appearance: none; /* Oculta el estilo nativo en la mayoría de navegadores */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-chevron-down" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> </svg>');
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" fill="gray" viewBox="0 0 16 16"><path d="M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1rem;
@@ -301,30 +254,21 @@ h1{
   box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
 }
 
-/* Responsive para select */
-@media (max-width: 768px) {
-  .campo select {
-    font-size: 1rem;
-    padding: 0.75rem;
-    background-position: right 0.5rem center;
-  }
-}
-
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 10px;
 }
 
 .header h1 {
-    flex: 1;
-    text-align: center;
-    margin: 0;
+  flex: 1;
+  text-align: center;
+  margin: 0;
 }
 
 .header a {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }

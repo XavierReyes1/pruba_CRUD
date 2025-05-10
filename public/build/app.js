@@ -1,51 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Botones para eliminar
-    const botonesEliminar = document.querySelectorAll('.boton-eliminar');
+    const tablaBody = document.querySelector('#clientes-body');
+    const inputBusqueda = document.querySelector('#busqueda');
 
-    botonesEliminar.forEach(boton => {
-        boton.addEventListener('click', event => {
-            event.preventDefault();
+    async function cargarClientes(busqueda = '') {
+        const res = await fetch(`/api/clientes?busqueda=${encodeURIComponent(busqueda)}`);
+        const json = await res.json();
+        tablaBody.innerHTML = '';
+        if (!json.success) return;
+        json.data.forEach(cliente => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${cliente.id}</td>
+                <td>${cliente.nombre}</td>
+                <td>${cliente.apellido}</td>
+                <td>${cliente.email}</td>
+                <td>${cliente.telefono}</td>
+                <td>${cliente.pais}</td>
+                <td>${cliente.fecha_registro}</td>
+                <td>
+                    <a href="/admin/actualizar?id=${cliente.id}" class="boton boton-amarillo">Editar</a>
+                    <button data-id="${cliente.id}" class="boton boton-rojo btn-eliminar">Eliminar</button>
+                </td>`;
+            tablaBody.appendChild(tr);
+        });
+        attachEventos();
+    }
 
-            const id = boton.dataset.id;
-            const nombre = boton.dataset.nombre;
+    function attachEventos() {
+        document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const id = btn.dataset.id;
+                const confirmacion = await Swal.fire({
+                    title: '¿Eliminar cliente?',
+                    text: "Esta acción no se puede deshacer.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                });
 
-            Swal.fire({
-                title: `¿Quires Eliminar el Registro?`,
-                text: "Esta acción no se puede deshacer.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, eliminar",
-                cancelButtonText: "Cancelar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "¡Eliminado!",
-                        text: `El Registro ha sido eliminado.`,
-                        icon: "success",
-                        timer: 1500,
-                        showConfirmButton: false
+                if (confirmacion.isConfirmed) {
+                    const formData = new FormData();
+                    formData.append('id', id);
+
+                    const res = await fetch('/api/eliminar-cliente', {
+                        method: 'POST',
+                        body: formData
                     });
 
-                    const formulario = boton.closest('form');
-                    if (formulario) {
-                        setTimeout(() => formulario.submit(), 1600);
+                    const json = await res.json();
+                    if (json.success) {
+                        Swal.fire('Eliminado', 'El cliente ha sido eliminado.', 'success');
+                        cargarClientes(inputBusqueda.value);
+                    } else {
+                        Swal.fire('Error', json.mensaje || 'No se pudo eliminar', 'error');
                     }
                 }
             });
         });
+    }
+
+    inputBusqueda?.addEventListener('input', e => {
+        cargarClientes(e.target.value);
     });
 
-    // Botón para cerrar sesión
+    cargarClientes();
+
+    // Cierre de sesión
     const botonSalir = document.querySelector('.boton-salir');
     if (botonSalir) {
-        botonSalir.addEventListener('click', event => {
-            event.preventDefault();
-
+        botonSalir.addEventListener('click', e => {
+            e.preventDefault();
             Swal.fire({
                 title: "¿Cerrar sesión?",
-                text: "Tendrás que volver a iniciar sesión para continuar.",
+                text: "Tendrás que volver a iniciar sesión.",
                 icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
