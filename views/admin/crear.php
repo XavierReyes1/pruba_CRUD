@@ -1,10 +1,10 @@
-<form method="POST" class="formulario">
+<form method="POST" class="formulario" id="formulario-crear">
     <?php include_once __DIR__ . '/../alertas.php'; ?>
     <fieldset>
         <legend>Crear Usuario</legend>
         <div class="campo">
             <label>Nombre</label>
-            <input type="text" name="nombre" required>
+            <input type="text" name="nombre" >
         </div>
         <div class="campo">
             <label>Apellido</label>
@@ -12,7 +12,7 @@
         </div>
         <div class="campo">
             <label>Email</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" >
         </div>
         <div class="campo">
             <label>Teléfono</label>
@@ -34,3 +34,5 @@
     </fieldset>
     <a href="/admin/index" class="boton">Volver</a>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/build/app.js"></script>

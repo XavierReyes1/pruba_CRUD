@@ -6,7 +6,8 @@
         "psr-4": {
             "MVC\\": "./",
             "Model\\": "models/",
-            "Controller\\": "controllers/"
+            "Controller\\": "controllers/",
+            "Classes\\": "classes/"
         }
     },
     "authors": [
@@ -15,5 +16,7 @@
             "email": "100733023+XavierReyes1@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "firebase/php-jwt": "^6.11"
+    }
 }

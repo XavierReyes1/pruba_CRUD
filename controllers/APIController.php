@@ -1,13 +1,16 @@
 <?php
+
 namespace Controller;
 
 use Model\Cliente;
 
-class ApiController {
+class ApiController
+{
 
-    public static function listar() {
-                    session_start();
-  sesionActiva();
+    public static function listar()
+    {
+        session_start();
+        sesionActiva();
         header('Content-Type: application/json');
         $busqueda = $_GET['busqueda'] ?? '';
         $clientes = Cliente::filtrar($busqueda);
@@ -17,9 +20,10 @@ class ApiController {
         ]);
     }
 
-    public static function mostrar() {
-                    session_start();
-  sesionActiva();
+    public static function mostrar()
+    {
+        session_start();
+        sesionActiva();
         header('Content-Type: application/json');
         $id = $_GET['id'] ?? null;
         $cliente = Cliente::buscar('id', $id);
@@ -31,9 +35,10 @@ class ApiController {
         echo json_encode(['success' => true, 'data' => $cliente]);
     }
 
-    public static function crear() {
-                    session_start();
-  sesionActiva();
+    public static function crear()
+    {
+        session_start();
+        sesionActiva();
         header('Content-Type: application/json');
         $datos = json_decode(file_get_contents('php://input'), true);
         $cliente = new Cliente($datos);
@@ -47,9 +52,10 @@ class ApiController {
         echo json_encode(['success' => true, 'data' => $cliente]);
     }
 
-    public static function actualizar() {
-                    session_start();
-  sesionActiva();
+    public static function actualizar()
+    {
+        session_start();
+        sesionActiva();
         header('Content-Type: application/json');
         $datos = json_decode(file_get_contents('php://input'), true);
         $id = $datos['id'] ?? null;
@@ -60,7 +66,6 @@ class ApiController {
             return;
         }
         $cliente->sincronizar($datos);
-        $cliente->fecha_registro = date('Y/m/d');
         $errores = $cliente->validar();
         if (!empty($errores['error'])) {
             http_response_code(400);
@@ -71,11 +76,12 @@ class ApiController {
         echo json_encode(['success' => true, 'data' => $cliente]);
     }
 
-    public static function eliminar() {
-                    session_start();
-  sesionActiva();
+    public static function eliminar()
+    {
+        session_start();
+        sesionActiva();
         header('Content-Type: application/json');
-        $id = $_POST['id'] ?? null;
+        $id = $_GET['id'] ?? null;
         $cliente = Cliente::buscar('id', $id);
         if (!$cliente) {
             http_response_code(404);

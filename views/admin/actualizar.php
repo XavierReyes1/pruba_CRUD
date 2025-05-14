@@ -1,4 +1,4 @@
-<form method="POST" class="formulario">
+<form id="formulario-actualizar" method="POST" class="formulario">
     <?php include_once __DIR__ . '/../alertas.php'; ?>
     <fieldset>
         <legend>Actualizar Usuario</legend>
@@ -30,7 +30,10 @@
                 ?>
             </select>
         </div>
+        <input type="hidden" name="id" value="<?php echo $cliente->id; ?>">
         <input type="submit" class="boton boton-verde" value="Actualizar Usuario">
     </fieldset>
     <a href="/admin/index" class="boton">Volver</a>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/build/app.js"></script>
