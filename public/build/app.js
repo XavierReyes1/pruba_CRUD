@@ -178,32 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Ejemplo de cómo consumir tu API con JWT
-async function obtenerClientes() {
-    // Obtener el token de donde lo hayas almacenado (localStorage, cookies, etc.)
-      const token = localStorage.getItem('jwt_token'); // O donde almacenes el token
-    
-    try {
 
-const response = await fetch('/api/clientes', {
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-});
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Error en la solicitud');
-        }
-        
-        return await response.json();
-    } catch (error) {
-        console.error('Error:', error);
-        // Manejar el error (redirigir a login si es 401)
-        if (error.message.includes('Token')) {
-            window.location.href = '/login';
-        }
-        return null;
+if (!res.ok) {
+    if (res.status === 401) {
+        window.location.href = '/';
+        return;
     }
 }
 

@@ -2,11 +2,11 @@
 namespace Controller;
 
 use MVC\Router;
+use Classes\AuthMiddleware;
 
 class ClientesController {
     public static function index(Router $router) {
-        session_start();
-        sesionActiva();
+     $datosUsuario = AuthMiddleware::proteger();
         
         $router->render('admin/index', [
             'clientes' => [],
@@ -15,8 +15,7 @@ class ClientesController {
     }
 
     public static function crear(Router $router) {
-        session_start();
-        sesionActiva();
+       $datosUsuario = AuthMiddleware::proteger();
         
         $router->render('admin/crear', [
             'cliente' => new \Model\Cliente(),
@@ -25,8 +24,7 @@ class ClientesController {
     }
 
     public static function actualizar(Router $router) {
-        session_start();
-        sesionActiva();
+      $datosUsuario = AuthMiddleware::proteger();
         
         $id = $_GET['id'] ?? null;
         $cliente = \Model\Cliente::buscar('id', $id);

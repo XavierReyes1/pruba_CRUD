@@ -3,14 +3,14 @@
 namespace Controller;
 
 use Model\Cliente;
+use Classes\AuthMiddleware;
 
 class ApiController
 {
 
     public static function listar()
     {
-        session_start();
-        sesionActiva();
+        $datosUsuario = AuthMiddleware::protegerAPI();
         header('Content-Type: application/json');
         $busqueda = $_GET['busqueda'] ?? '';
         $clientes = Cliente::filtrar($busqueda);
@@ -22,8 +22,7 @@ class ApiController
 
     public static function mostrar()
     {
-        session_start();
-        sesionActiva();
+        $datosUsuario = AuthMiddleware::protegerAPI();
         header('Content-Type: application/json');
         $id = $_GET['id'] ?? null;
         $cliente = Cliente::buscar('id', $id);
@@ -37,8 +36,7 @@ class ApiController
 
     public static function crear()
     {
-        session_start();
-        sesionActiva();
+       $datosUsuario = AuthMiddleware::protegerAPI();
         header('Content-Type: application/json');
         $datos = json_decode(file_get_contents('php://input'), true);
         $cliente = new Cliente($datos);
@@ -54,8 +52,7 @@ class ApiController
 
     public static function actualizar()
     {
-        session_start();
-        sesionActiva();
+       $datosUsuario = AuthMiddleware::protegerAPI();
         header('Content-Type: application/json');
         $datos = json_decode(file_get_contents('php://input'), true);
         $id = $datos['id'] ?? null;
@@ -78,8 +75,7 @@ class ApiController
 
     public static function eliminar()
     {
-        session_start();
-        sesionActiva();
+       $datosUsuario = AuthMiddleware::protegerAPI();
         header('Content-Type: application/json');
         $id = $_GET['id'] ?? null;
         $cliente = Cliente::buscar('id', $id);
